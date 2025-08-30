@@ -1,0 +1,17 @@
+<div>
+    <h2>WebRTC Video Chat</h2>
+    <video id="localVideo" autoplay playsinline [srcObject]="localStream"
+        style="width: 45%; border: 1px solid;"></video>
+    <video id="remoteVideo" autoplay playsinline [srcObject]="remoteStream"
+        style="width: 45%; border: 1px solid;"></video>
+    <div *ngIf="!inCall && otherClients.length">
+        <p>Select a client to call:</p>
+        <button *ngFor="let client of otherClients" (click)="startCall(client)">Call {{client}}</button>
+    </div>
+    <div *ngIf="incomingCall">
+        <p>Incoming Call from {{incomingCall.from}}</p>
+        <button (click)="acceptCall()">Accept</button>
+        <button (click)="hangUp()">Reject</button>
+    </div>
+    <button *ngIf="inCall" (click)="hangUp()">Hang Up</button>
+</div>
